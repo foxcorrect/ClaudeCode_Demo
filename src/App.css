@@ -1,0 +1,91 @@
+/* Office Chores Manager Styles */
+
+/* Calendar customizations */
+.rbc-calendar {
+  font-family: inherit;
+}
+
+.rbc-today {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.rbc-event {
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.rbc-selected {
+  background-color: inherit;
+}
+
+.rbc-show-more {
+  color: #3498db;
+  font-weight: 500;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Utility classes */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rbc-toolbar {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rbc-btn-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Animation for new items */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
