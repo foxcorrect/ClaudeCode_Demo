@@ -1,0 +1,80 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: wechat-match-backend
+
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wechat_match?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root123
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 0
+    timeout: 5000ms
+    lettuce:
+      pool:
+        max-active: 20
+        max-idle: 10
+        min-idle: 5
+
+  # RabbitMQ配置（可选）
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+# MyBatis Plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.wechat.match.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# 微信小程序配置
+wechat:
+  mini-program:
+    app-id: ${WECHAT_APP_ID:your_app_id}
+    app-secret: ${WECHAT_APP_SECRET:your_app_secret}
+    token-url: https://api.weixin.qq.com/sns/jscode2session
+
+# JWT配置
+jwt:
+  secret: ${JWT_SECRET:your_jwt_secret_key_here}
+  expiration: ${JWT_EXPIRATION:86400000}
+  header: Authorization
+
+# 匹配系统配置
+match:
+  system:
+    max-concurrent-matches: 5        # 每人最大同时匹配数
+    match-timeout-seconds: 30        # 匹配超时时间
+    chat-expire-days: 7              # 聊天数据保留天数
+    daily-match-limit: 50            # 每日匹配次数限制
+
+# 日志配置
+logging:
+  level:
+    com.wechat.match: DEBUG
+    org.springframework.web.socket: INFO
+    org.springframework.data.redis: INFO
