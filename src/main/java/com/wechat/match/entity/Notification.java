@@ -41,7 +41,6 @@ public class Notification {
     @TableField("expire_time")
     private LocalDateTime expireTime;
 
-    @TableField("created_at")
-    @TableField(fill = FieldFill.INSERT)
+    @TableField(value = "created_at", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
 }

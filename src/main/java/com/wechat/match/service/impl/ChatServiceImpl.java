@@ -15,8 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * 聊天服务实现类
@@ -185,14 +187,14 @@ public class ChatServiceImpl implements ChatService {
             String offlineKey = OFFLINE_MESSAGES_KEY + userId;
             List<Object> messages = redisTemplate.opsForList().range(offlineKey, 0, -1);
             if (messages == null || messages.isEmpty()) {
-                return List.of();
+                return Collections.emptyList();
             }
 
             // 转换为ChatMessage列表
             List<ChatMessage> chatMessages = messages.stream()
                     .filter(obj -> obj instanceof ChatMessage)
                     .map(obj -> (ChatMessage) obj)
-                    .toList();
+                    .collect(Collectors.toList());
 
             // 清空离线消息
             redisTemplate.delete(offlineKey);
@@ -202,7 +204,7 @@ public class ChatServiceImpl implements ChatService {
 
         } catch (Exception e) {
             log.error("获取离线消息失败，userId: {}", userId, e);
-            return List.of();
+            return Collections.emptyList();
         }
     }
 

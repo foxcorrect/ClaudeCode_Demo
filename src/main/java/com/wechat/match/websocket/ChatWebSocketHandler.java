@@ -10,6 +10,7 @@ import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -176,20 +177,18 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     }
 
     private void sendSuccess(WebSocketSession session, String message) throws IOException {
-        Map<String, Object> response = Map.of(
-                "type", "success",
-                "message", message,
-                "timestamp", System.currentTimeMillis()
-        );
+        Map<String, Object> response = new HashMap<>();
+        response.put("type", "success");
+        response.put("message", message);
+        response.put("timestamp", System.currentTimeMillis());
         session.sendMessage(new TextMessage(JSON.toJSONString(response)));
     }
 
     private void sendError(WebSocketSession session, String error) throws IOException {
-        Map<String, Object> response = Map.of(
-                "type", "error",
-                "message", error,
-                "timestamp", System.currentTimeMillis()
-        );
+        Map<String, Object> response = new HashMap<>();
+        response.put("type", "error");
+        response.put("message", error);
+        response.put("timestamp", System.currentTimeMillis());
         session.sendMessage(new TextMessage(JSON.toJSONString(response)));
     }
 }

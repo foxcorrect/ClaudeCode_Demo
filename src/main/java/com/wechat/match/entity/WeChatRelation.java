@@ -34,7 +34,6 @@ public class WeChatRelation {
 
     private Integer status; // 1-有效，0-已删除
 
-    @TableField("created_at")
-    @TableField(fill = FieldFill.INSERT)
+    @TableField(value = "created_at", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
 }

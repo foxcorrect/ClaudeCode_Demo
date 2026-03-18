@@ -37,7 +37,6 @@ public class ChatMessage {
     @TableField("send_time")
     private LocalDateTime sendTime;
 
-    @TableField("created_at")
-    @TableField(fill = FieldFill.INSERT)
+    @TableField(value = "created_at", fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
 }
